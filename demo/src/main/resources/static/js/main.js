@@ -108,3 +108,5 @@ function joinSession(sessionId, username) {
     })
     .catch(error => console.error('Error joining session:', error));
 }
+
+
