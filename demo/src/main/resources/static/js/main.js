@@ -26,8 +26,13 @@ document.getElementById('load-sessions').addEventListener('click', function() {
 document.getElementById('create-session-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const sessionName = document.getElementById('sessionName').value;
-    const startTime = document.getElementById('startTime').value;
-    const endTime = document.getElementById('endTime').value;
+    const startTime = new Date(document.getElementById('startTime').value);
+    const endTime = new Date(document.getElementById('endTime').value);
+
+    if (startTime > endTime) {
+        alert('Start time cannot be after end time');
+        return;
+    }
 
     fetch('/api/sessions/create', {
         method: 'POST',

@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,6 +16,7 @@ public class GameSessionService {
     private GameSessionRepository gameSessionRepository;
 
     public GameSession createSession(GameSession gameSession) {
+        validateSessionDates(gameSession.getStartTime(), gameSession.getEndTime());
         String creator = getCurrentUsername();
         gameSession.setCreator(creator);
         return gameSessionRepository.save(gameSession);
@@ -45,6 +47,12 @@ public class GameSessionService {
             return ((UserDetails) principal).getUsername();
         } else {
             return principal.toString();
+        }
+    }
+
+    private void validateSessionDates(LocalDateTime startTime, LocalDateTime endTime) {
+        if (startTime.isAfter(endTime)) {
+            throw new IllegalArgumentException("Start time cannot be after end time");
         }
     }
 }
