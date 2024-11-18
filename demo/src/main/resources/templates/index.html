@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glassmorphism Welcome Page</title>
+    <title>Game Sessions Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link type="Image/x-icon" href="/icon/ignisreges.ico" rel="icon">
 </head>
 <body>
-    <div class="glass-container">
-        <h1>Welcome to the Game Sessions Platform</h1>
-        <button id="login-button" class="glass-button">Login</button>
-        <button id="register-button" class="glass-button">Register</button>
+    <div class="main-container">
+        <!-- Секция с активными сессиями -->
+        <div class="dashboard-container">
+            <h1>Game Sessions Dashboard</h1>
+            <button id="load-sessions" class="button">Load Active Sessions</button>
+            <div id="session-list"></div>
+        </div>
+
+        <!-- Добавляем отступ -->
+        <hr class="divider">
+
+        <!-- Секция формы создания сессии -->
+        <form id="create-session-form" class="form-container">
+            <input type="text" id="sessionName" placeholder="Session Name" required/>
+            <div class="date-inputs">
+                <input type="datetime-local" id="startTime" required/>
+                <input type="datetime-local" id="endTime" required/>
+            </div>
+            <button type="submit" class="button">Create Session</button>
+        </form>
     </div>
 
-    <script>
-        document.getElementById('login-button').addEventListener('click', function() {
-            window.location.href = '/login';
-        });
-
-        document.getElementById('register-button').addEventListener('click', function() {
-            window.location.href = '/register';
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

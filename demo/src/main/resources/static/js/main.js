@@ -13,6 +13,7 @@ document.getElementById('load-sessions').addEventListener('click', function() {
                         <p>Start Time: ${new Date(session.startTime).toLocaleString()}</p>
                         <p>End Time: ${new Date(session.endTime).toLocaleString()}</p>
                         <p>Status: ${session.status}</p>
+                        <p>Creator: ${session.creator}</p>
                     </div>
                 `;
                 sessionElement.addEventListener('click', () => toggleSessionDetails(sessionElement));

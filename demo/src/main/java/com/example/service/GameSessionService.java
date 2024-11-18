@@ -3,6 +3,8 @@ package com.example.service;
 import com.example.model.GameSession;
 import com.example.repository.GameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,8 @@ public class GameSessionService {
     private GameSessionRepository gameSessionRepository;
 
     public GameSession createSession(GameSession gameSession) {
+        String creator = getCurrentUsername();
+        gameSession.setCreator(creator);
         return gameSessionRepository.save(gameSession);
     }
 
@@ -33,5 +37,14 @@ public class GameSessionService {
 
     public GameSession getSessionDetails(Long sessionId) {
         return gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
+    }
+
+    private String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        } else {
+            return principal.toString();
+        }
     }
 }
