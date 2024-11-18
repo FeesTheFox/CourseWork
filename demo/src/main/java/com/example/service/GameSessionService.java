@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Service
 public class GameSessionService {
@@ -19,6 +22,7 @@ public class GameSessionService {
         validateSessionDates(gameSession.getStartTime(), gameSession.getEndTime());
         String creator = getCurrentUsername();
         gameSession.setCreator(creator);
+        gameSession.setJoinedUsers(creator); // Добавляем создателя в список присоединенных пользователей
         return gameSessionRepository.save(gameSession);
     }
 
@@ -32,9 +36,24 @@ public class GameSessionService {
         return gameSessionRepository.save(gameSession);
     }
 
-    public void joinSession(Long sessionId, Long userId) {
-        // Логика для добавления пользователя в сессию
-        // Например, добавление пользователя в список участников сессии
+    public void joinSession(Long sessionId, String username) {
+    GameSession gameSession = gameSessionRepository.findById(sessionId)
+            .orElseThrow(() -> new RuntimeException("Session not found"));
+
+    // Создаем изменяемый список пользователей
+        List<String> joinedUsers = new ArrayList<>(List.of(gameSession.getJoinedUsers().split(",")));
+
+    // Проверяем, что пользователь еще не присоединился
+    if (joinedUsers.contains(username)) {
+        throw new RuntimeException("User already joined this session");
+    }
+
+    // Добавляем нового пользователя
+        joinedUsers.add(username);
+        gameSession.setJoinedUsers(String.join(",", joinedUsers));
+
+    // Сохраняем обновленную сессию
+        gameSessionRepository.save(gameSession);
     }
 
     public GameSession getSessionDetails(Long sessionId) {

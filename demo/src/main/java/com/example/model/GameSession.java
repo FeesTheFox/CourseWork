@@ -28,4 +28,6 @@ public class GameSession {
     @Column(nullable = false)
     private String creator;
 
+    @Column(nullable = false)
+    private String joinedUsers; // Список пользователей, присоединенных к сессии
 }

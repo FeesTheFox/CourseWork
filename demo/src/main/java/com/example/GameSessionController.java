@@ -4,6 +4,7 @@ import com.example.model.GameSession;
 import com.example.service.GameSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class GameSessionController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<String> joinSession(@RequestParam Long sessionId, @RequestParam Long userId) {
-        gameSessionService.joinSession(sessionId, userId);
+    public ResponseEntity<String> joinSession(@RequestParam Long sessionId, @RequestParam String username) {
+        gameSessionService.joinSession(sessionId, username);
         return ResponseEntity.ok("Joined session successfully");
     }
 
@@ -43,4 +44,11 @@ public class GameSessionController {
         GameSession session = gameSessionService.getSessionDetails(sessionId);
         return ResponseEntity.ok(session);
     }
+
+    @GetMapping("/current-user")
+    public ResponseEntity<String> getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok(username);
+    }
+
 }
