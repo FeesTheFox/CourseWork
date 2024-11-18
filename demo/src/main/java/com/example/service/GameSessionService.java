@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @Service
 public class GameSessionService {
@@ -41,7 +39,7 @@ public class GameSessionService {
             .orElseThrow(() -> new RuntimeException("Session not found"));
 
     // Создаем изменяемый список пользователей
-        List<String> joinedUsers = new ArrayList<>(List.of(gameSession.getJoinedUsers().split(",")));
+    List<String> joinedUsers = new ArrayList<>(List.of(gameSession.getJoinedUsers().split(",")));
 
     // Проверяем, что пользователь еще не присоединился
     if (joinedUsers.contains(username)) {
@@ -49,7 +47,7 @@ public class GameSessionService {
     }
 
     // Добавляем нового пользователя
-        joinedUsers.add(username);
+    joinedUsers.add(username);
         gameSession.setJoinedUsers(String.join(",", joinedUsers));
 
     // Сохраняем обновленную сессию

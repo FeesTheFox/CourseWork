@@ -9,8 +9,8 @@ fetch('/api/sessions/current-user')
     })
     .catch(error => console.error('Error fetching current user:', error));
 
-// Загрузка активных сессий
-document.getElementById('load-sessions').addEventListener('click', function() {
+// Функция для загрузки активных сессий
+function loadActiveSessions() {
     fetch('/api/sessions/active')
         .then(response => response.json())
         .then(data => {
@@ -48,7 +48,10 @@ document.getElementById('load-sessions').addEventListener('click', function() {
             });
         })
         .catch(error => console.error('Error loading sessions:', error));
-});
+}
+
+// Автоматически загружаем активные сессии при загрузке страницы
+document.addEventListener('DOMContentLoaded', loadActiveSessions);
 
 // Обработчик создания новой сессии
 document.getElementById('create-session-form').addEventListener('submit', function(event) {
@@ -72,7 +75,7 @@ document.getElementById('create-session-form').addEventListener('submit', functi
     .then(response => response.json())
     .then(data => {
         alert('Session created successfully!');
-        document.getElementById('load-sessions').click();
+        loadActiveSessions(); // Обновляем список сессий после создания
     })
     .catch(error => console.error('Error creating session:', error));
 });
@@ -101,7 +104,7 @@ function joinSession(sessionId, username) {
     })
     .then(() => {
         alert('Joined session successfully!');
-        document.getElementById('load-sessions').click();
+        loadActiveSessions(); // Обновляем список сессий после присоединения
     })
     .catch(error => console.error('Error joining session:', error));
 }
