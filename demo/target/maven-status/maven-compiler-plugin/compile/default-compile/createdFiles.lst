@@ -1,3 +1,4 @@
+com\example\AuthController.class
 com\example\repository\GameSessionRepository.class
 com\example\Main.class
 com\example\config\SecurityConfig.class

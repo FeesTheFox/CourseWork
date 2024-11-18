@@ -13,12 +13,20 @@
             <!-- Active sessions will be displayed here -->
         </div>
         <button id="load-sessions">Load Active Sessions</button>
+        <button id="login-button">Login</button>
+        <button id="register-button">Register</button>
     </div>
 
     <script>
         document.getElementById('load-sessions').addEventListener('click', function() {
             fetch('/api/sessions/active')
-                .then(response => response.json())
+                .then(response => {
+                    if (response.status === 401) {
+                        window.location.href = '/login';
+                    } else {
+                        return response.json();
+                    }
+                })
                 .then(data => {
                     const sessionList = document.getElementById('session-list');
                     sessionList.innerHTML = '';
@@ -36,6 +44,14 @@
                 })
                 .catch(error => console.error('Error:', error));
         });
-    </script>
+
+        document.getElementById('login-button').addEventListener('click', function() {
+        window.location.href = '/login';
+         });
+
+        document.getElementById('register-button').addEventListener('click', function() {
+        window.location.href = '/register';
+        });
+</script>
 </body>
 </html>

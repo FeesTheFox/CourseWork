@@ -38,20 +38,26 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/api/users/register").permitAll();
                 auth.requestMatchers("/api/sessions/**").authenticated();
-                auth.requestMatchers("/", "/index.html", "/styles.css", "/js/**").permitAll();
-                auth.requestMatchers("/login").permitAll();
+                auth.requestMatchers("/", "/index.html", "/styles.css", "/js/**", "/login", "/register").permitAll();
                 auth.anyRequest().authenticated();
-            })
+            })            
             .formLogin(form -> form
                 .loginPage("/login")
                 .permitAll()
+                .defaultSuccessUrl("/index.html", true)
             )
-            .authenticationProvider(authenticationProvider())
-            .httpBasic();
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .permitAll()
+            )
+            .authenticationProvider(authenticationProvider());
+            
+
 
         return http.build();
     }
