@@ -1,24 +1,36 @@
 package com.example;
 
+import com.example.model.User;
+import com.example.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AuthController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/login")
     public String login() {
-        logger.info("Handling login request");
         return "login";
     }
 
     @GetMapping("/register")
     public String register() {
-        logger.info("Handling register request");
         return "register";
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
+        userService.registerUser(user);
+        return ResponseEntity.ok("User registered successfully");
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
     }
 }

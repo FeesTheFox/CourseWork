@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Sessions Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Sessions Dashboard</h1>
+        <div id="session-list">
+            <!-- Active sessions will be displayed here -->
+        </div>
+        <button id="load-sessions">Load Active Sessions</button>
+    </div>
+
+    <form id="create-session-form">
+        <input type="text" id="sessionName" placeholder="Session Name" required/>
+        <input type="datetime-local" id="startTime" required/>
+        <input type="datetime-local" id="endTime" required/>
+        <button type="submit">Create Session</button>
+    </form>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

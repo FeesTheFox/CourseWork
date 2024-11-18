@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Game Sessions Platform</h1>
+        <button id="login-button" class="button">Login</button>
+        <button id="register-button" class="button">Register</button>
+    </div>
+
+    <script>
+        document.getElementById('login-button').addEventListener('click', function() {
+            window.location.href = '/login';
+        });
+
+        document.getElementById('register-button').addEventListener('click', function() {
+            window.location.href = '/register';
+        });
+    </script>
+</body>
+</html>

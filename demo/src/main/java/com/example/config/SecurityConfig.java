@@ -43,12 +43,13 @@ public class SecurityConfig {
                 auth.requestMatchers("/api/users/register").permitAll();
                 auth.requestMatchers("/api/sessions/**").authenticated();
                 auth.requestMatchers("/", "/index.html", "/styles.css", "/js/**", "/login", "/register").permitAll();
+                auth.requestMatchers("/dashboard").authenticated();
                 auth.anyRequest().authenticated();
-            })            
+            })
             .formLogin(form -> form
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/index.html", true)
+                .defaultSuccessUrl("/dashboard", true)
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
@@ -56,8 +57,6 @@ public class SecurityConfig {
                 .permitAll()
             )
             .authenticationProvider(authenticationProvider());
-            
-
 
         return http.build();
     }

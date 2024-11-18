@@ -1,11 +1,10 @@
 package com.example.service;
 
-
 import com.example.model.GameSession;
 import com.example.repository.GameSessionRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -18,12 +17,21 @@ public class GameSessionService {
     }
 
     public List<GameSession> getActiveSessions() {
-        return gameSessionRepository.findByStatus("ACTIVE");
+        return gameSessionRepository.findByStatus("active");
     }
 
     public GameSession endSession(Long id) {
-        GameSession session = gameSessionRepository.findById(id).orElseThrow();
-        session.setStatus("ENDED");
-        return gameSessionRepository.save(session);
+        GameSession gameSession = gameSessionRepository.findById(id).orElseThrow(() -> new RuntimeException("Session not found"));
+        gameSession.setStatus("ended");
+        return gameSessionRepository.save(gameSession);
+    }
+
+    public void joinSession(Long sessionId, Long userId) {
+        // Логика для добавления пользователя в сессию
+        // Например, добавление пользователя в список участников сессии
+    }
+
+    public GameSession getSessionDetails(Long sessionId) {
+        return gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
     }
 }
