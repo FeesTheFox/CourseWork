@@ -24,4 +24,5 @@ public class GameSession {
 
     @Column(nullable = false)
     private String status;
+
 }
