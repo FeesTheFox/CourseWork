@@ -3,16 +3,19 @@ document.getElementById('load-sessions').addEventListener('click', function() {
         .then(response => response.json())
         .then(data => {
             const sessionList = document.getElementById('session-list');
-            sessionList.innerHTML = '';
+            sessionList.innerHTML = ''; // Очищаем список сессий
             data.forEach(session => {
                 const sessionElement = document.createElement('div');
-                sessionElement.className = 'session';
+                sessionElement.className = 'session-item';
                 sessionElement.innerHTML = `
                     <h2>${session.sessionName}</h2>
-                    <p>Start Time: ${session.startTime}</p>
-                    <p>End Time: ${session.endTime}</p>
-                    <p>Status: ${session.status}</p>
+                    <div class="session-details">
+                        <p>Start Time: ${new Date(session.startTime).toLocaleString()}</p>
+                        <p>End Time: ${new Date(session.endTime).toLocaleString()}</p>
+                        <p>Status: ${session.status}</p>
+                    </div>
                 `;
+                sessionElement.addEventListener('click', () => toggleSessionDetails(sessionElement));
                 sessionList.appendChild(sessionElement);
             });
         })
@@ -35,6 +38,17 @@ document.getElementById('create-session-form').addEventListener('submit', functi
     .then(response => response.json())
     .then(data => {
         alert('Session created successfully!');
+        // Обновляем список сессий после создания новой сессии
+        document.getElementById('load-sessions').click();
     })
     .catch(error => console.error('Error:', error));
 });
+
+function toggleSessionDetails(sessionElement) {
+    const sessionDetails = sessionElement.querySelector('.session-details');
+    if (sessionDetails.style.display === 'none' || sessionDetails.style.display === '') {
+        sessionDetails.style.display = 'block';
+    } else {
+        sessionDetails.style.display = 'none';
+    }
+}

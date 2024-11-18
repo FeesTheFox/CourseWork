@@ -7,20 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Game Sessions Dashboard</h1>
-        <div id="session-list">
-            <!-- Active sessions will be displayed here -->
+    <div class="main-container">
+        <!-- Секция с активными сессиями -->
+        <div class="dashboard-container">
+            <h1>Game Sessions Dashboard</h1>
+            <button id="load-sessions" class="button">Load Active Sessions</button>
+            <div id="session-list"></div>
         </div>
-        <button id="load-sessions" class="button">Load Active Sessions</button>
-    </div>
 
-    <form id="create-session-form" class="form-container">
-        <input type="text" id="sessionName" placeholder="Session Name" required/>
-        <input type="datetime-local" id="startTime" required/>
-        <input type="datetime-local" id="endTime" required/>
-        <button type="submit" class="button">Create Session</button>
-    </form>
+        <!-- Добавляем отступ -->
+        <hr class="divider">
+
+        <!-- Секция формы создания сессии -->
+        <form id="create-session-form" class="form-container">
+            <input type="text" id="sessionName" placeholder="Session Name" required/>
+            <div class="date-inputs">
+                <input type="datetime-local" id="startTime" required/>
+                <input type="datetime-local" id="endTime" required/>
+            </div>
+            <button type="submit" class="button">Create Session</button>
+        </form>
+    </div>
 
     <script src="js/main.js"></script>
 </body>

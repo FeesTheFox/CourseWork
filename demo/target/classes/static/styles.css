@@ -72,3 +72,61 @@ a {
     color: #007bff;
     text-decoration: none;
 }
+
+
+.session-item {
+    background-color: #3b3b3b;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.session-item h2 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.session-details {
+    display: none;
+    margin-top: 10px;
+    color: #e0e0e0;
+}
+
+.date-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.date-inputs input {
+    flex: 1;
+}
+
+.form-container {
+    background-color: #2c2c2c; /* Темный фон формы */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    width: 100%;
+    text-align: center;
+}
+
+.form-container input[type="text"], .form-container input[type="datetime-local"] {
+    width: calc(100% - 22px); /* 22px - padding */
+    padding: 10px;
+    background-color: #3b3b3b; /* Темный фон полей ввода */
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #e0e0e0; /* Светлый текст */
+    margin-bottom: 10px;
+}
+
+.divider {
+    margin: 20px 0;
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+}
