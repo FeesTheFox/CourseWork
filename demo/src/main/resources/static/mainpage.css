@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Buch.otf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Extrafett.otf') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+body {
+    font-family: 'Soehne', Arial, sans-serif;
+    background-color: #1a1a1a; /* Темный фон */
+    color: #e0e0e0; /* Светлый текст */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+header {
+    width: 100%;
+    background-color: #2c2c2c; /* Темный фон хэдера */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px; /* Отступ между хэдером и основным контентом */
+    position: relative;
+    z-index: 1000; /* Чтобы хэдер был поверх размытия */
+}
+
+.logo {
+    font-size: 24px;
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 10px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-links a {
+    color: #ffffff; /* Белый текст */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #e0e0e0; /* Светлый текст при наведении */
+}
+
+.dropdown {
+    width: 100%;
+    max-width: 600px;
+    background: none; /* Убираем фон */
+    backdrop-filter: none; /* Убираем эффект glassmorph */
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    height: 0; /* Начальная высота */
+    position: absolute;
+    top: 60px; /* Позиция под хэдером */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001; /* Чтобы контейнер был поверх размытия */
+}
+
+.dropdown-content {
+    padding: 20px;
+    text-align: center;
+    color: #e0e0e0; /* Светлый текст */
+    background: none; /* Убираем фон */
+    border-radius: 10px;
+}
+
+.dropdown-content h2 {
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 10px;
+}
+
+.dropdown-content p {
+    font-size: 16px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px; /* Отступ между основным контентом и футером */
+    transition: filter 0.3s ease;
+}
+
+.main-content.blur {
+    filter: blur(10px); /* Увеличенный блюр */
+}
+
+.welcome-container {
+    max-width: 600px;
+    padding: 40px;
+    background-color: #2c2c2c; /* Темный фон контейнера */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+}
+
+.welcome-container h1 {
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 20px;
+}
+
+.welcome-container p {
+    color: #e0e0e0; /* Светлый текст */
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.try-session-button {
+    padding: 15px 30px;
+    background-color: #ffffff; /* Белый фон кнопки */
+    color: #2c2c2c; /* Темный текст кнопки */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.try-session-button:hover {
+    background-color: #e0e0e0; /* Светлый фон кнопки при наведении */
+}
+
+footer {
+    width: 100%;
+    background-color: #2c2c2c; /* Темный фон футера */
+    padding: 10px;
+    text-align: center;
+    position: relative; /* Изменено на relative */
+    bottom: 0;
+}
+
+.footer-content p {
+    margin: 0;
+    color: #e0e0e0; /* Светлый текст */
+}

@@ -3,24 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glassmorphism Welcome Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Game Sessions Platform</title>
+    <link rel="stylesheet" href="mainpage.css">
     <link type="Image/x-icon" href="/icon/ignisreges.ico" rel="icon">
 </head>
 <body>
-    <div class="glass-container">
-        <h1>Welcome to the Game Sessions Platform</h1>
-        <button id="login-button" class="glass-button">Login</button>
-        <button id="register-button" class="glass-button">Register</button>
+    <header>
+        <nav>
+            <div class="logo">Game Sessions Platform</div>
+            <div class="nav-links">
+                <a href="#" id="about-us-link">About us</a>
+            </div>
+        </nav>
+        <div id="about-us-dropdown" class="dropdown">
+            <div class="dropdown-content">
+                <h2>About Us</h2>
+                <p>The Game Sessions Platform is a cutting-edge solution designed to facilitate the organization of interactive video games with real actors. Our platform provides a robust server-side infrastructure that ensures smooth and engaging gaming experiences. Whether you're a game developer, an actor, or a gamer, our platform offers the tools and features you need to create and participate in immersive gaming sessions.</p>
+            </div>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="welcome-container">
+            <h1>Welcome to the Game Sessions Platform</h1>
+            <p>Join our community and start creating and joining game sessions with ease. Whether you're a seasoned gamer or just starting out, our platform offers a seamless experience for all.</p>
+            <button id="try-session-button" class="try-session-button">Try Session</button>
+        </div>
     </div>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Game Sessions Platform. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        document.getElementById('login-button').addEventListener('click', function() {
-            window.location.href = '/login';
+        document.getElementById('try-session-button').addEventListener('click', function() {
+            window.location.href = '/register';
         });
 
-        document.getElementById('register-button').addEventListener('click', function() {
-            window.location.href = '/register';
+        const aboutUsLink = document.getElementById('about-us-link');
+        const aboutUsDropdown = document.getElementById('about-us-dropdown');
+        const mainContent = document.querySelector('.main-content');
+
+        aboutUsLink.addEventListener('mouseenter', function() {
+            aboutUsDropdown.style.height = '200px'; // Высота выпадающего окна
+            mainContent.classList.add('blur');
+            aboutUsLink.style.color = '#ffffff'; // Подсветка ссылки
+        });
+
+        aboutUsLink.addEventListener('mouseleave', function() {
+            aboutUsDropdown.style.height = '0';
+            mainContent.classList.remove('blur');
+            aboutUsLink.style.color = ''; // Сброс цвета ссылки
+        });
+
+        aboutUsDropdown.addEventListener('mouseenter', function() {
+            aboutUsDropdown.style.height = '200px';
+            mainContent.classList.add('blur');
+        });
+
+        aboutUsDropdown.addEventListener('mouseleave', function() {
+            aboutUsDropdown.style.height = '0';
+            mainContent.classList.remove('blur');
         });
     </script>
 </body>
