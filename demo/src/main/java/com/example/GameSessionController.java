@@ -4,7 +4,6 @@ import com.example.model.GameSession;
 import com.example.service.GameSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,11 +43,4 @@ public class GameSessionController {
         GameSession session = gameSessionService.getSessionDetails(sessionId);
         return ResponseEntity.ok(session);
     }
-
-    @GetMapping("/current-user")
-    public ResponseEntity<String> getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return ResponseEntity.ok(username);
-    }
-
 }

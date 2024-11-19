@@ -1,13 +1,37 @@
 // Переменная для хранения текущего пользователя
-let currentUser = '';
+let currentUser = null;
 
 // Запрашиваем текущего пользователя с сервера при загрузке страницы
-fetch('/api/sessions/current-user')
-    .then(response => response.text())
+fetch('/api/users/current-user')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         currentUser = data;
+        console.log('Current user:', currentUser); // Логируем текущего пользователя для отладки
+        checkUserRole();
     })
-    .catch(error => console.error('Error fetching current user:', error));
+    .catch(error => {
+        console.error('Error fetching current user:', error);
+        return fetch('/api/users/current-user')
+            .then(response => response.text())
+            .then(text => console.log('Server response:', text))
+            .catch(error => console.error('Error fetching server response:', error));
+    });
+
+// Функция для проверки роли пользователя и управления видимостью формы создания сессии
+function checkUserRole() {
+    const createSessionForm = document.getElementById('create-session-form');
+    if (currentUser && currentUser.role === 'Host') {
+        createSessionForm.style.display = 'block';
+    } else {
+        createSessionForm.style.display = 'none';
+    }
+    console.log('Form display style:', createSessionForm.style.display); // Логируем стиль для отладки
+}
 
 // Функция для загрузки активных сессий
 function loadActiveSessions() {
@@ -40,7 +64,7 @@ function loadActiveSessions() {
                     event.stopPropagation(); // Предотвращаем всплытие события
                     const sessionId = this.getAttribute('data-session-id');
                     if (currentUser) {
-                        joinSession(sessionId, currentUser);
+                        joinSession(sessionId, currentUser.username);
                     } else {
                         alert('Error: User is not authenticated.');
                     }
@@ -108,5 +132,3 @@ function joinSession(sessionId, username) {
     })
     .catch(error => console.error('Error joining session:', error));
 }
-
-
