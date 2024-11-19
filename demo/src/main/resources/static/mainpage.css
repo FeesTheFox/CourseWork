@@ -96,6 +96,10 @@ header {
     line-height: 1.6; /* Увеличенный отступ в тексте */
 }
 
+.dropdown-content:hover {
+    color: #2c2c2c;
+}
+
 .dropdown-content h2 {
     color: #ffffff; /* Белый текст */
     margin-bottom: 10px;
@@ -121,6 +125,10 @@ header {
 .main-content.blur {
     filter: blur(10px); /* Увеличенный блюр */
     background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%); /* Радиальный градиент */
+}
+
+.blur {
+    filter: blur(5px);
 }
 
 .welcome-container {
@@ -150,11 +158,18 @@ header {
     border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавляем тень для эффекта поднятия */
 }
 
 .try-session-button:hover {
     background-color: #e0e0e0; /* Светлый фон кнопки при наведении */
+    transform: translateY(-2px); /* Поднимаем кнопку при наведении */
+}
+
+.try-session-button:active {
+    transform: translateY(0); /* Возвращаем кнопку на место при нажатии */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Уменьшаем тень при нажатии */
 }
 
 footer {

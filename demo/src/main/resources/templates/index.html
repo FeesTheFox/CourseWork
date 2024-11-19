@@ -6,6 +6,32 @@
     <title>Game Sessions Platform</title>
     <link rel="stylesheet" href="mainpage.css">
     <link type="Image/x-icon" href="/icon/ignisreges.ico" rel="icon">
+    <style>
+        /* Blinking cursor effect */
+        .typing-cursor {
+            display: inline-block;
+            width: 0;
+            border-right: 2px solid;
+            animation: blink 0.7s steps(1) infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Shake effect for characters */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+        }
+
+        .shake {
+            display: inline-block;
+            animation: shake 0.2s ease-in-out;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -28,7 +54,7 @@
     <div class="main-content">
         <div class="welcome-container">
             <h1>• Welcome to the Game Sessions Platform</h1>
-            <p>Join our community and start creating and joining game sessions with ease. Whether you're a seasoned gamer or just starting out, our platform offers a seamless experience for all.</p>
+            <p id="typing-text"></p>
             <button id="try-session-button" class="try-session-button">Try Session</button>
         </div>
     </div>
@@ -67,6 +93,37 @@
         aboutUsDropdown.addEventListener('mouseleave', function() {
             aboutUsDropdown.style.height = '0';
             mainContent.classList.remove('blur');
+        });
+
+        // Typing effect
+        const text = "Join our community and start creating and joining game sessions with ease. Whether you're a seasoned gamer or just starting out, our platform offers a seamless experience for all.";
+        const typingTextElement = document.getElementById('typing-text');
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                const char = text.charAt(index);
+                const charSpan = document.createElement('span');
+                charSpan.textContent = char;
+                charSpan.classList.add('shake');
+                typingTextElement.appendChild(charSpan);
+
+                // Remove shake class after animation ends
+                setTimeout(() => {
+                    charSpan.classList.remove('shake');
+                }, 100); // Adjust this value to match the duration of the shake animation
+
+                index++;
+                setTimeout(type, 40); // Adjust the speed of typing here
+            } else {
+                // Remove the cursor after typing is complete
+                typingTextElement.innerHTML += '<span class="typing-cursor"></span>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            typingTextElement.innerHTML = '<span class="typing-cursor"></span>';
+            type();
         });
     </script>
 </body>
