@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchCommits();
 
     // Set up a polling mechanism to dynamically update the commits
-    setInterval(fetchCommits, 60000); // Update every 60 seconds
+    setInterval(fetchCommits, 600000); // Обновление каждые 10 минут
+
 
     // Add event listener to the scroll button
     const scrollToBottomButton = document.getElementById('scroll-to-bottom-button');
