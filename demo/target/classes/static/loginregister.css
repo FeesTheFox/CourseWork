@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Buch.otf') format('opentype'); /* Указываем правильный формат */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Extrafett.otf') format('opentype'); /* Указываем правильный формат */
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Soehne', Arial, sans-serif;
+    background-color: #000000; /* Темный фон */
+    color: #e0e0e0; /* Светлый текст */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+    background-color: transparent; /* Убираем фон контейнера */
+    text-align: center;
+}
+
+h1 {
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #e0e0e0; /* Светлый текст */
+}
+
+input[type="text"], input[type="password"], input[type="confirmPassword"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #3b3b3b; /* Темный фон полей ввода */
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #e0e0e0; /* Светлый текст */
+}
+
+button.login-button, a.login-button {
+    padding: 15px 30px;
+    background-color: #ffffff; /* Белый фон кнопки */
+    color: #2c2c2c; /* Темный текст кнопки */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Убираем подчеркивание для ссылок */
+}
+
+button.login-button:hover, a.login-button:hover {
+    background-color: #e0e0e0; /* Светлый фон кнопки при наведении */
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+    color: #e0e0e0; /* Светлый текст */
+}

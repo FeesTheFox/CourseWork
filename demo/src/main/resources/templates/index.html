@@ -10,7 +10,9 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Game Sessions Platform</div>
+            <div class="logo-container">
+                <div class="logo">Game Sessions Platform</div>
+            </div>
             <div class="nav-links">
                 <a href="#" id="about-us-link">About us</a>
             </div>
@@ -31,9 +33,10 @@
     </div>
     <footer>
         <div class="footer-content">
-            <p>&copy; 2023 Game Sessions Platform. All rights reserved.</p>
+            <p>&copy; 2024 Game Sessions Platform. All rights reserved.</p>
         </div>
     </footer>
+    <div class="blur-overlay"></div> <!-- Добавленный слой для градиента -->
 
     <script>
         document.getElementById('try-session-button').addEventListener('click', function() {
@@ -43,27 +46,37 @@
         const aboutUsLink = document.getElementById('about-us-link');
         const aboutUsDropdown = document.getElementById('about-us-dropdown');
         const mainContent = document.querySelector('.main-content');
+        const footer = document.querySelector('footer');
+        const blurOverlay = document.querySelector('.blur-overlay');
 
         aboutUsLink.addEventListener('mouseenter', function() {
             aboutUsDropdown.style.height = '200px'; // Высота выпадающего окна
             mainContent.classList.add('blur');
+            footer.classList.add('blur');
+            blurOverlay.classList.add('active');
             aboutUsLink.style.color = '#ffffff'; // Подсветка ссылки
         });
 
         aboutUsLink.addEventListener('mouseleave', function() {
             aboutUsDropdown.style.height = '0';
             mainContent.classList.remove('blur');
+            footer.classList.remove('blur');
+            blurOverlay.classList.remove('active');
             aboutUsLink.style.color = ''; // Сброс цвета ссылки
         });
 
         aboutUsDropdown.addEventListener('mouseenter', function() {
             aboutUsDropdown.style.height = '200px';
             mainContent.classList.add('blur');
+            footer.classList.add('blur');
+            blurOverlay.classList.add('active');
         });
 
         aboutUsDropdown.addEventListener('mouseleave', function() {
             aboutUsDropdown.style.height = '0';
             mainContent.classList.remove('blur');
+            footer.classList.remove('blur');
+            blurOverlay.classList.remove('active');
         });
     </script>
 </body>

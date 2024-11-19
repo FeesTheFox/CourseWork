@@ -1,21 +1,20 @@
 @font-face {
     font-family: 'Soehne';
-    src: url('/fonts/TestSöhneMono-Buch.otf') format('woff');
+    src: url('/fonts/TestSöhneMono-Buch.otf') format('opentype'); /* Указываем правильный формат */
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Soehne';
-    src: url('/fonts/TestSöhneMono-Extrafett.otf') format('woff');
+    src: url('/fonts/TestSöhneMono-Extrafett.otf') format('opentype'); /* Указываем правильный формат */
     font-weight: bold;
     font-style: normal;
 }
 
-
 body {
     font-family: 'Soehne', Arial, sans-serif;
-    background-color: #1a1a1a; /* Темный фон */
+    background-color: #000000; /* Темный фон */
     color: #e0e0e0; /* Светлый текст */
     margin: 0;
     padding: 0;
@@ -27,26 +26,38 @@ body {
 
 header {
     width: 100%;
-    background-color: #2c2c2c; /* Темный фон хэдера */
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 40px; /* Отступ между хэдером и основным контентом */
     position: relative;
     z-index: 1000; /* Чтобы хэдер был поверх размытия */
+    background: none; /* Убираем фон */
+}
+
+.logo-container {
+
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
+    padding: 20px;
     font-size: 24px;
     color: #ffffff; /* Белый текст */
-    margin-bottom: 10px;
+    margin-left: 20px; /* Отступ слева */
 }
 
 .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    padding-bottom: 50px;
     justify-content: center;
-    width: 100%;
+    align-items: center;
 }
 
 .nav-links a {
@@ -78,10 +89,11 @@ header {
 
 .dropdown-content {
     padding: 20px;
-    text-align: center;
+    text-align: left; /* Выравнивание текста по левому краю */
     color: #e0e0e0; /* Светлый текст */
     background: none; /* Убираем фон */
     border-radius: 10px;
+    line-height: 1.6; /* Увеличенный отступ в тексте */
 }
 
 .dropdown-content h2 {
@@ -99,20 +111,22 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: left; /* Выравнивание текста по левому краю */
     margin-bottom: 40px; /* Отступ между основным контентом и футером */
     transition: filter 0.3s ease;
+    background: none; /* Убираем фон */
+    box-shadow: none; /* Убираем тень */
 }
 
 .main-content.blur {
     filter: blur(10px); /* Увеличенный блюр */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); /* Градиент по краям */
 }
 
 .welcome-container {
     max-width: 600px;
     padding: 40px;
-    background-color: #2c2c2c; /* Темный фон контейнера */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    background-color: transparent; /* Убираем фон */
     border-radius: 10px;
 }
 
@@ -125,6 +139,7 @@ header {
     color: #e0e0e0; /* Светлый текст */
     font-size: 18px;
     margin-bottom: 20px;
+    line-height: 1.6; /* Увеличенный отступ в тексте */
 }
 
 .try-session-button {
@@ -144,14 +159,37 @@ header {
 
 footer {
     width: 100%;
-    background-color: #2c2c2c; /* Темный фон футера */
     padding: 10px;
     text-align: center;
     position: relative; /* Изменено на relative */
     bottom: 0;
+    background: none; /* Убираем фон */
 }
 
 .footer-content p {
     margin: 0;
     color: #e0e0e0; /* Светлый текст */
+}
+
+
+.main-content.blur,
+footer.blur {
+    filter: blur(10px); /* Увеличенный блюр */
+}
+
+.blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%); /* Радиальный градиент */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 999; /* Чтобы градиент был поверх размытого контента */
+    pointer-events: none; /* Чтобы градиент не мешал взаимодействию с контентом */
+}
+
+.blur-overlay.active {
+    opacity: 1;
 }

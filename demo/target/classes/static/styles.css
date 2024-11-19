@@ -1,7 +1,21 @@
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Buch.otf') format('opentype'); /* Указываем правильный формат */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Extrafett.otf') format('opentype'); /* Указываем правильный формат */
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a; /* Темный фон */
-    color: #e0e0e0; /* Светлый текст */
+    font-family: 'Soehne', Arial, sans-serif;
+    background-color: #000000; /* Темный фон */
+    color: #ffffff; /* Светлый текст */
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,14 +24,16 @@ body {
     height: 100vh;
 }
 
-.container {
-    max-width: 400px;
+.main-container {
+    max-width: 800px;
     width: 100%;
     padding: 40px;
-    background-color: #2c2c2c; /* Темный фон контейнера */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    border-radius: 10px;
+    background-color: transparent; /* Убираем фон контейнера */
     text-align: center;
+}
+
+.dashboard-container {
+    margin-bottom: 40px;
 }
 
 h1 {
@@ -35,7 +51,7 @@ label {
     color: #e0e0e0; /* Светлый текст */
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="confirmPassword"], input[type="datetime-local"] {
     width: 100%;
     padding: 10px;
     background-color: #3b3b3b; /* Темный фон полей ввода */
@@ -45,21 +61,19 @@ input[type="text"], input[type="password"] {
     color: #e0e0e0; /* Светлый текст */
 }
 
-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #007bff;
-    color: #fff;
+button.login-button, a.login-button, button.join-button {
+    padding: 15px 30px;
+    background-color: #ffffff; /* Белый фон кнопки */
+    color: #2c2c2c; /* Темный текст кнопки */
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
-    margin-bottom: 10px; /* Добавляет отступ между кнопками */
-    transition: background-color 0.3s ease;
+    text-decoration: none; /* Убираем подчеркивание для ссылок */
 }
 
-button:hover {
-    background-color: #0056b3;
+button.login-button:hover, a.login-button:hover, button.join-button:hover {
+    background-color: #ffffff; /* Белый фон кнопки при наведении */
 }
 
 p {
@@ -68,29 +82,24 @@ p {
     color: #e0e0e0; /* Светлый текст */
 }
 
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-
 .session-item {
-    background-color: #3b3b3b;
+    background-color: #121212; /* Белый фон сессии */
     padding: 10px;
     border-radius: 5px;
     margin: 5px 0;
     cursor: pointer;
+    color: #d0cccc; /* Черный текст */
 }
 
 .session-item h2 {
     margin: 0;
-    color: #ffffff;
+    color: #ffffff; /* Черный текст */
 }
 
 .session-details {
     display: none;
     margin-top: 10px;
-    color: #e0e0e0;
+    color: #f8f8f8; /* Черный текст */
 }
 
 .date-inputs {
@@ -105,10 +114,10 @@ a {
 }
 
 .form-container {
-    background-color: #2c2c2c; /* Темный фон формы */
+    background-color: transparent; /* Убираем фон формы */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: none; /* Убираем тень */
     width: 100%;
     text-align: center;
 }
@@ -128,7 +137,6 @@ a {
     margin: 20px 0;
     border: none;
     height: 1px;
-    background-color: #ddd;
 }
 
 #session-list {
@@ -137,7 +145,7 @@ a {
     border: 1px solid #444;
     padding: 10px;
     margin-bottom: 20px;
-    background-color: #333;
+    background-color: transparent; /* Убираем фон списка сессий */
     border-radius: 8px;
 }
 
@@ -152,11 +160,11 @@ a {
 }
 
 #session-list::-webkit-scrollbar-thumb {
-    background-color: #007bff; /* Цвет полосы прокрутки */
+    background-color: #040d16; /* Цвет полосы прокрутки */
     border-radius: 8px;
     border: 2px solid #444; /* Пространство вокруг полосы */
 }
 
 #session-list::-webkit-scrollbar-thumb:hover {
-    background-color: #0056b3; /* Цвет полосы при наведении */
+    background-color: #03172e; /* Цвет полосы при наведении */
 }

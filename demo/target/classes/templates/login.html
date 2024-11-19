@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loginregister.css">
     <link type="Image/x-icon" href="/icon/ignisreges.ico" rel="icon">
 </head>
 <body>
@@ -12,14 +12,14 @@
         <h1>Login</h1>
         <form th:action="@{/login}" method="post">
             <div>
-                <label for="username">Username:</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div>
-                <label for="password">Password:</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" class="login-button">Login</button>
         </form>
         <p>Don't have an account? <a href="/register">Register here</a></p>
     </div>
