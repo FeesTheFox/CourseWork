@@ -13,6 +13,7 @@ fetch('/api/users/current-user')
         currentUser = data;
         console.log('Current user:', currentUser); // Логируем текущего пользователя для отладки
         checkUserRole();
+        loadActiveSessions(); // Загружаем активные сессии после получения текущего пользователя
     })
     .catch(error => {
         console.error('Error fetching current user:', error);
@@ -52,6 +53,7 @@ function loadActiveSessions() {
                         <p>Creator: ${session.creator}</p>
                         <p>Joined Users: ${session.joinedUsers}</p>
                         <button class="join-button" data-session-id="${session.id}">Join Session</button>
+                        ${currentUser && currentUser.username === session.creator ? `<button class="end-button" data-session-id="${session.id}">End Session</button>` : ''}
                     </div>
                 `;
                 sessionElement.addEventListener('click', () => toggleSessionDetails(sessionElement));
@@ -65,6 +67,19 @@ function loadActiveSessions() {
                     const sessionId = this.getAttribute('data-session-id');
                     if (currentUser) {
                         joinSession(sessionId, currentUser.username);
+                    } else {
+                        alert('Error: User is not authenticated.');
+                    }
+                });
+            });
+
+            // Обработчики кнопок завершения сессии
+            document.querySelectorAll('.end-button').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.stopPropagation(); // Предотвращаем всплытие события
+                    const sessionId = this.getAttribute('data-session-id');
+                    if (currentUser) {
+                        endSession(sessionId);
                     } else {
                         alert('Error: User is not authenticated.');
                     }
@@ -131,4 +146,25 @@ function joinSession(sessionId, username) {
         loadActiveSessions(); // Обновляем список сессий после присоединения
     })
     .catch(error => console.error('Error joining session:', error));
+}
+
+// Функция для завершения сессии
+function endSession(sessionId) {
+    fetch(`/api/sessions/end/${sessionId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to end session');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('Session ended successfully!');
+        loadActiveSessions(); // Обновляем список сессий после завершения
+    })
+    .catch(error => console.error('Error ending session:', error));
 }

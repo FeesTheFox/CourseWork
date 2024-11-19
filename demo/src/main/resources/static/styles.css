@@ -61,7 +61,7 @@ input[type="text"], input[type="password"], input[type="confirmPassword"], input
     color: #e0e0e0; /* Светлый текст */
 }
 
-button.login-button, a.login-button, button.join-button {
+button.login-button, a.login-button, button.join-button, button.end-button {
     padding: 15px 30px;
     background-color: #ffffff; /* Белый фон кнопки */
     color: #2c2c2c; /* Темный текст кнопки */
@@ -72,7 +72,7 @@ button.login-button, a.login-button, button.join-button {
     text-decoration: none; /* Убираем подчеркивание для ссылок */
 }
 
-button.login-button:hover, a.login-button:hover, button.join-button:hover {
+button.login-button:hover, a.login-button:hover, button.join-button:hover, button.end-button:hover {
     background-color: #ffffff; /* Белый фон кнопки при наведении */
 }
 
