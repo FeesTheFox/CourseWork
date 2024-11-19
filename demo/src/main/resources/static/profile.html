@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link type="Image/x-icon" href="/icon/ignisreges.ico" rel="icon">
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>User Profile</h1>
+            <a id="profile-button" class="profile-button" onclick="goBack()">
+                <img src="profile.svg" alt="Profile Icon">
+            </a>
+        </header>
+
+        <div class="profile-container">
+            <h2>Profile Information</h2>
+            <div id="profile-info">
+                <p><strong>Username:</strong> <span id="username"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Role:</strong> <span id="role"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/users/current-user')
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById('username').textContent = user.username;
+                    document.getElementById('email').textContent = user.email;
+                    document.getElementById('role').textContent = user.role;
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

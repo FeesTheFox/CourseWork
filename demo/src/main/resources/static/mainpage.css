@@ -193,3 +193,25 @@ footer.blur {
 .blur-overlay.active {
     opacity: 1;
 }
+
+
+
+.profile-container {
+    max-width: 600px;
+    padding: 40px;
+    background-color: transparent; /* Убираем фон */
+    border-radius: 10px;
+    text-align: left; /* Выравнивание текста по левому краю */
+}
+
+.profile-container h2 {
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 20px;
+}
+
+.profile-container p {
+    color: #e0e0e0; /* Светлый текст */
+    font-size: 18px;
+    margin-bottom: 10px;
+    line-height: 1.6; /* Увеличенный отступ в тексте */
+}

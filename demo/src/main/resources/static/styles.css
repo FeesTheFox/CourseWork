@@ -230,3 +230,30 @@ p {
 .ended-session-list::-webkit-scrollbar-thumb:hover {
     background-color: #03172e; /* Цвет полосы при наведении */
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 10px; /* Добавляем отступы для увеличения области hover */
+    transition: background-color 0.3s; /* Плавный переход для фона */
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    display: inline-block; /* Делаем ссылку блочным элементом */
+}
+
+.profile-button img {
+    width: 40px; /* Размер иконки */
+    height: 40px; /* Размер иконки */
+}
+
+.profile-button:hover {
+    background-color: #777171;
+}
