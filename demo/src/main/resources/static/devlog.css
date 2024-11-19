@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Buch.otf') format('opentype'); /* Указываем правильный формат */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Soehne';
+    src: url('/fonts/TestSöhneMono-Extrafett.otf') format('opentype'); /* Указываем правильный формат */
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Soehne', Arial, sans-serif;
+    background-color: #000000; /* Темный фон */
+    color: #e0e0e0; /* Светлый текст */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px; /* Отступ между хэдером и основным контентом */
+    position: relative;
+    z-index: 1000; /* Чтобы хэдер был поверх размытия */
+    background: none; /* Убираем фон */
+}
+
+.logo-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    padding: 20px;
+    font-size: 24px;
+    color: #ffffff; /* Белый текст */
+    margin-left: 20px; /* Отступ слева */
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002; /* Увеличиваем z-index, чтобы ссылки были поверх размытия */
+}
+
+.nav-links a {
+    color: #ffffff; /* Белый текст */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    margin: 0 20px; /* Увеличенный отступ между ссылками */
+}
+
+.nav-links a:hover {
+    color: #e0e0e0; /* Светлый текст при наведении */
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left; /* Выравнивание текста по левому краю */
+    margin-bottom: 40px; /* Отступ между основным контентом и футером */
+    transition: filter 0.3s ease;
+    background: none; /* Убираем фон */
+    box-shadow: none; /* Убираем тень */
+}
+
+.welcome-container {
+    max-width: 800px;
+    padding: 40px;
+    background-color: transparent; /* Убираем фон */
+    border-radius: 10px;
+}
+
+.welcome-container h1 {
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 20px;
+}
+
+#commits-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.commit-card {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.commit-card h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.commit-card p {
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+footer {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    position: relative; /* Изменено на relative */
+    bottom: 0;
+    background: none; /* Убираем фон */
+    transition: filter 0.3s ease; /* Добавляем плавный переход для блюра */
+}
+
+.footer-content p {
+    margin: 0;
+    color: #e0e0e0; /* Светлый текст */
+}

@@ -1,11 +1,11 @@
 com\example\AuthController.class
 com\example\repository\GameSessionRepository.class
 com\example\Main.class
-com\example\config\SecurityConfig.class
 com\example\service\GameSessionService.class
-com\example\repository\UserRepository.class
 com\example\model\GameSession.class
+com\example\model\User.class
+com\example\config\SecurityConfig.class
+com\example\repository\UserRepository.class
 com\example\service\UserService.class
 com\example\GameSessionController.class
-com\example\model\User.class
 com\example\UserController.class
