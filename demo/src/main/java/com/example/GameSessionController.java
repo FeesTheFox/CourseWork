@@ -67,4 +67,10 @@ public class GameSessionController {
             return principal.toString();
         }
     }
+
+    @GetMapping("/{sessionId}")
+    public ResponseEntity<GameSession> getSessionById(@PathVariable Long sessionId) {
+        GameSession session = gameSessionService.getSessionDetails(sessionId);
+        return ResponseEntity.ok(session);
+    }   
 }
