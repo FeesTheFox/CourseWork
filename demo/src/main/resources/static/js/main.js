@@ -92,6 +92,34 @@ function loadActiveSessions() {
 // Автоматически загружаем активные сессии при загрузке страницы
 document.addEventListener('DOMContentLoaded', loadActiveSessions);
 
+
+// Функция для загрузки завершенных сессий
+function loadEndedSessions() {
+    fetch('/api/sessions/ended')
+        .then(response => response.json())
+        .then(data => {
+            const endedSessionList = document.getElementById('ended-session-list');
+            endedSessionList.innerHTML = ''; // Очищаем список сессий
+            data.forEach(session => {
+                const sessionElement = document.createElement('div');
+                sessionElement.className = 'ended-session-item';
+                sessionElement.innerHTML = `
+                    <h3>${session.sessionName}</h3>
+                    <p>Start Time: ${new Date(session.startTime).toLocaleString()}</p>
+                    <p>End Time: ${new Date(session.endTime).toLocaleString()}</p>
+                    <p>Creator: ${session.creator}</p>
+                    <p>Joined Users: ${session.joinedUsers}</p>
+                `;
+                endedSessionList.appendChild(sessionElement);
+            });
+        })
+        .catch(error => console.error('Error loading ended sessions:', error));
+}
+
+// Автоматически загружаем завершенные сессии при загрузке страницы
+document.addEventListener('DOMContentLoaded', loadEndedSessions);
+
+
 // Обработчик создания новой сессии
 document.getElementById('create-session-form').addEventListener('submit', function(event) {
     event.preventDefault();

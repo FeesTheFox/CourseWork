@@ -28,6 +28,10 @@ public class GameSessionService {
         return gameSessionRepository.findByStatus("active");
     }
 
+    public List<GameSession> getEndedSessions() {
+        return gameSessionRepository.findByStatus("ended");
+    }
+
     public GameSession endSession(Long id) {
         GameSession gameSession = gameSessionRepository.findById(id).orElseThrow(() -> new RuntimeException("Session not found"));
         gameSession.setStatus("ended");
@@ -35,22 +39,22 @@ public class GameSessionService {
     }
 
     public void joinSession(Long sessionId, String username) {
-    GameSession gameSession = gameSessionRepository.findById(sessionId)
-            .orElseThrow(() -> new RuntimeException("Session not found"));
+        GameSession gameSession = gameSessionRepository.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Session not found"));
 
-    // Создаем изменяемый список пользователей
-    List<String> joinedUsers = new ArrayList<>(List.of(gameSession.getJoinedUsers().split(",")));
+        // Создаем изменяемый список пользователей
+        List<String> joinedUsers = new ArrayList<>(List.of(gameSession.getJoinedUsers().split(",")));
 
-    // Проверяем, что пользователь еще не присоединился
-    if (joinedUsers.contains(username)) {
-        throw new RuntimeException("User already joined this session");
-    }
+        // Проверяем, что пользователь еще не присоединился
+        if (joinedUsers.contains(username)) {
+            throw new RuntimeException("User already joined this session");
+        }
 
-    // Добавляем нового пользователя
-    joinedUsers.add(username);
+        // Добавляем нового пользователя
+        joinedUsers.add(username);
         gameSession.setJoinedUsers(String.join(",", joinedUsers));
 
-    // Сохраняем обновленную сессию
+        // Сохраняем обновленную сессию
         gameSessionRepository.save(gameSession);
     }
 

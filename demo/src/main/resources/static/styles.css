@@ -168,3 +168,65 @@ p {
 #session-list::-webkit-scrollbar-thumb:hover {
     background-color: #03172e; /* Цвет полосы при наведении */
 }
+
+
+/* Existing styles */
+
+.ended-sessions-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.ended-sessions-container h2 {
+    color: #ffffff; /* Белый текст */
+    margin-bottom: 10px;
+}
+
+.ended-session-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: transparent; /* Убираем фон списка сессий */
+}
+
+.ended-session-item {
+    background-color: #121212; /* Темный фон сессии */
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
+    flex: 0 0 auto;
+    color: #d0cccc; /* Светлый текст */
+}
+
+.ended-session-item h3 {
+    margin: 0;
+    color: #ffffff; /* Белый текст */
+}
+
+.ended-session-item p {
+    margin: 5px 0;
+    color: #f8f8f8; /* Светлый текст */
+}
+
+/* Стили для полосы прокрутки */
+.ended-session-list::-webkit-scrollbar {
+    height: 8px;
+}
+
+.ended-session-list::-webkit-scrollbar-track {
+    background: #444; /* Цвет фона трека */
+    border-radius: 8px;
+}
+
+.ended-session-list::-webkit-scrollbar-thumb {
+    background-color: #040d16; /* Цвет полосы прокрутки */
+    border-radius: 8px;
+    border: 2px solid #444; /* Пространство вокруг полосы */
+}
+
+.ended-session-list::-webkit-scrollbar-thumb:hover {
+    background-color: #03172e; /* Цвет полосы при наведении */
+}

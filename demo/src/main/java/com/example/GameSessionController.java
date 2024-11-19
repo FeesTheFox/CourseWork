@@ -53,6 +53,12 @@ public class GameSessionController {
         return ResponseEntity.ok(session);
     }
 
+    @GetMapping("/ended")
+    public ResponseEntity<List<GameSession>> getEndedSessions() {
+        List<GameSession> endedSessions = gameSessionService.getEndedSessions();
+        return ResponseEntity.ok(endedSessions);
+    }
+
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
