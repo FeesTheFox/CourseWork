@@ -16,9 +16,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    
     public User registerUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email is already in use");
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("Username is already taken");
+        }
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new IllegalArgumentException("Email is already taken");
         }
         return userRepository.save(user);
     }
