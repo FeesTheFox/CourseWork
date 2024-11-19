@@ -47,7 +47,7 @@ label {
     color: #e0e0e0; /* Светлый текст */
 }
 
-input[type="text"], input[type="password"], input[type="confirmPassword"] {
+input[type="text"], input[type="password"], input[type="confirmPassword"], input[type="email"] {
     width: 100%;
     padding: 10px;
     background-color: #3b3b3b; /* Темный фон полей ввода */

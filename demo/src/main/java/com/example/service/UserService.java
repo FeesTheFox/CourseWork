@@ -17,6 +17,9 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     public User registerUser(User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email is already in use");
+        }
         return userRepository.save(user);
     }
 
@@ -35,3 +38,4 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 }
+

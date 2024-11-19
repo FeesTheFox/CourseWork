@@ -16,6 +16,10 @@
                 <input type="text" id="username" name="username" required>
             </div>
             <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
@@ -30,25 +34,38 @@
 
     <script>
         document.getElementById('register-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value; // Добавлено поле email
+        const password = document.getElementById('password').value;
+        const role = document.getElementById('role').value;
 
-            fetch('/api/users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password, role })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Registration successful!');
-                window.location.href = '/login';
-            })
-            .catch(error => console.error('Error:', error));
+        console.log('Attempting to register:', { username, email, password, role });
+
+        fetch('/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email, password, role }) // Отправка email
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            if (!response.ok) {
+                throw new Error('Failed to register');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Registration successful:', data);
+            alert('Registration successful!');
+            window.location.href = '/login';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to register. Please try again.');
         });
+    });
     </script>
 </body>
 </html>
