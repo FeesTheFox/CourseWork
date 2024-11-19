@@ -122,6 +122,28 @@ header {
     line-height: 1.6;
 }
 
+#scroll-to-bottom-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 1001; /* Ensure it's above other content */
+}
+
+#scroll-to-bottom-button img {
+    width: 24px;
+    height: 24px;
+}
+
+#scroll-to-bottom-button:hover {
+    background-color: #e0e0e0;
+}
+
 footer {
     width: 100%;
     padding: 10px;

@@ -48,4 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Set up a polling mechanism to dynamically update the commits
     setInterval(fetchCommits, 60000); // Update every 60 seconds
+
+    // Add event listener to the scroll button
+    const scrollToBottomButton = document.getElementById('scroll-to-bottom-button');
+    scrollToBottomButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    });
 });
