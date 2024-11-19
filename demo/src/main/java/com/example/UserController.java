@@ -3,7 +3,6 @@ package com.example;
 import com.example.model.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +18,17 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
-        try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            User registeredUser = userService.registerUser(user);
-            return ResponseEntity.ok(registeredUser);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        // Проверяем, что роль допустима
+        if (!User.isValidRole(user.getRole())) {
+            return ResponseEntity.badRequest().body("Invalid role. Allowed values are: Player, Host");
         }
+
+        // Хэшируем пароль и сохраняем пользователя
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User registeredUser = userService.registerUser(user);
+        return ResponseEntity.ok(registeredUser);
     }
+
     
 
     @GetMapping("/{username}")

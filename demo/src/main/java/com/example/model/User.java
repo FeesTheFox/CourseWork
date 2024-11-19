@@ -1,5 +1,8 @@
 package com.example.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,4 +25,10 @@ public class User {
 
     @Column(nullable = false)
     private String role;
+
+    public static boolean isValidRole(String role) {
+        List<String> validRoles = Arrays.asList("Player", "Host");
+        return validRoles.contains(role);
+    }
+    
 }

@@ -24,8 +24,18 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <div>
-                <label for="role">Role:</label>
-                <input type="text" id="role" name="role" required>
+                <label for="role">Role</label>
+                <div class="radio-group">
+                    <div>
+                        <img src="player.svg" id="player" class="role-image" data-role="Player" name="role" alt="Player">
+                        <label for="player">Player</label>
+                    </div>
+                    <div>
+                        <img src="host.svg" id="host" class="role-image" data-role="Host" name="role" alt="Host">
+                        <label for="host">Host</label>
+                    </div>
+                </div>
+                <input type="hidden" name="role" id="hidden-role"> <!-- Скрытое поле для хранение выбранной роли -->
             </div>
             <button type="submit" class="login-button">Register</button>
         </form>
@@ -33,35 +43,59 @@
     </div>
 
     <script>
-        document.getElementById('register-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const role = document.getElementById('role').value;
+        document.getElementById('register-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-        fetch('/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, email, password, role })
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(message => { throw new Error(message); });
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('hidden-role').value;
+
+            if (!role) {
+                alert('Please select a role.');
+                return;
             }
-            return response.json();
-        })
-        .then(data => {
-            alert('Registration successful!');
-            window.location.href = '/login';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to register: ' + error.message);
-        }); 
-    });
+
+            fetch('/api/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, email, password, role })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to register');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Registration successful!');
+                    window.location.href = '/login';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to register. Please try again.');
+                });
+        });
+    </script>
+
+    <script>
+        const roleImages = document.querySelectorAll('.role-image');
+        const hiddenRoleInput = document.getElementById('hidden-role');
+
+        roleImages.forEach(image => {
+            image.addEventListener('click', function() {
+                // Убираем класс 'selected' от всех изображений
+                roleImages.forEach(img => img.classList.remove('selected'));
+
+                // Устанавливаем выбранную роль в скрытое поле
+                hiddenRoleInput.value = this.dataset.role;
+
+                // Добавляем класс 'selected' к выбранному изображению
+                this.classList.add('selected');
+            });
+        });
     </script>
 </body>
 </html>

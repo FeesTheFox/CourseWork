@@ -45,6 +45,7 @@ label {
     display: block;
     margin-bottom: 5px;
     color: #e0e0e0; /* Светлый текст */
+    cursor: pointer;
 }
 
 input[type="text"], input[type="password"], input[type="confirmPassword"], input[type="email"] {
@@ -77,4 +78,36 @@ p {
     text-align: center;
     margin-top: 20px;
     color: #e0e0e0; /* Светлый текст */
+}
+
+
+.radio-group {
+    display: flex; /* Горизонтальное выравнивание */
+    align-items: center; /* Центрирование по вертикали */
+    padding-left: 40px;
+    padding-top: 15px;
+    gap: 100px; /* Пробел между элементами */
+}
+
+input[type="radio"] {
+    accent-color: #1db954; /* Цвет выделения для radio кнопок */
+}
+
+
+input[type="radio"]:checked + label {
+
+    font-weight: bold; /* Выделение выбранной метки */
+}
+
+.role-image {
+    width: 100px; /* Ширина изображения */
+    cursor: pointer; /* Указатель при наведении */
+    border: 2px solid transparent; /* Рамка по умолчанию */
+    border-radius: 8px; /* Закругление углов */
+    transition: border-color 0.3s; /* Плавный переход рамки */
+    color: white;
+}
+
+.role-image.selected {
+    border-color: #8a8a8a; /* Цвет рамки при выборе */
 }
