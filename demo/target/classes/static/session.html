@@ -11,6 +11,11 @@
     <div class="session-container" id="session-container">
         <!-- Контент сессии будет загружаться динамически -->
     </div>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" accept="video/*">
+        <button type="submit">Upload Video</button>
+    </form>
+    <video id="video-player" controls style="display:none;"></video>
     <script src="js/session.js"></script>
 </body>
 </html>

@@ -30,4 +30,8 @@ public class GameSession {
 
     @Column(nullable = false)
     private String joinedUsers; // Список пользователей, присоединенных к сессии
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] videoData; // Новая колонка для хранения видео данных
 }

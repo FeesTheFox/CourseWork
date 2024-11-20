@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
@@ -61,6 +63,16 @@ public class GameSessionService {
     public GameSession getSessionDetails(Long sessionId) {
         return gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
     }
+
+    public GameSession uploadVideo(Long sessionId, MultipartFile file) throws IOException {
+        GameSession gameSession = gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
+    
+        // Сохраняем данные файла в базе данных
+        gameSession.setVideoData(file.getBytes());
+        return gameSessionRepository.save(gameSession);
+    }
+    
+    
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
