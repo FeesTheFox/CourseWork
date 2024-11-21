@@ -156,19 +156,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 feedback.style.display = 'block';
 
                 if (result.message === 'Correct! You won!') {
-                    // Display the winning message
-                    alert('Correct! You won!');
-
-                    // Redirect to the dashboard after 10 seconds
                     setTimeout(() => {
                         window.location.href = '/dashboard';
-                    }, 10000);
+                    }, 10000); // Задержка перед редиректом
+                } else {
+                    alert('Nope, not quite right, try again later');
                 }
             })
             .catch(error => {
                 console.error('Error submitting answer:', error);
             });
         });
+
     } else {
         console.error('Session ID is missing');
         const sessionContainer = document.getElementById('session-container');

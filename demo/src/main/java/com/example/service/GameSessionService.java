@@ -20,9 +20,6 @@ public class GameSessionService {
     @Autowired
     private GameSessionRepository gameSessionRepository;
 
-    @Autowired
-    private UserService userService;
-
     public GameSession createSession(GameSession gameSession) {
         validateSessionDates(gameSession.getStartTime(), gameSession.getEndTime());
         String creator = getCurrentUsername();
