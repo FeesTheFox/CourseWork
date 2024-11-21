@@ -12,8 +12,9 @@
         <!-- Контент сессии будет загружаться динамически -->
     </div>
     <form id="upload-form" enctype="multipart/form-data">
-        <input type="file" name="file" id="file" accept="video/*">
-        <button type="submit">Upload Video</button>
+        <label for="file" class="file-input-label">Choose File</label>
+        <input type="file" name="file" id="file" accept="video/*" class="file-input">
+        <button type="submit" class="upload-button">Upload Video</button>
     </form>
     <video id="video-player" controls style="display:none;"></video>
     <script src="js/session.js"></script>

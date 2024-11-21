@@ -71,15 +71,18 @@ public class GameSessionController {
 
     @GetMapping("/{sessionId}/video")
     public ResponseEntity<byte[]> getVideo(@PathVariable Long sessionId) {
-        GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
-        if (gameSession.getVideoData() != null) {
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(gameSession.getVideoData());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
+    if (gameSession.getVideoData() != null) {
+        MediaType videoMp4 = new MediaType("video", "mp4"); // Создание MediaType вручную
+        return ResponseEntity.ok()
+                .contentType(videoMp4) // Установите правильный MIME-тип
+                .body(gameSession.getVideoData());
+    } else {
+        return ResponseEntity.notFound().build();
     }
+}
+
+
 
 
     private String getCurrentUsername() {

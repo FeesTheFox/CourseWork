@@ -60,8 +60,7 @@ input[type="text"], input[type="password"], input[type="confirmPassword"], input
     box-sizing: border-box;
     color: #e0e0e0; /* Светлый текст */
 }
-
-button.login-button, a.login-button, button.join-button, button.end-button, button.enter-button {
+button.login-button, a.login-button, button.join-button, button.end-button, button.enter-button, button.upload-button, .file-input-label {
     padding: 15px 30px;
     background-color: #ffffff; /* Белый фон кнопки */
     color: #2c2c2c; /* Темный текст кнопки */
@@ -72,9 +71,14 @@ button.login-button, a.login-button, button.join-button, button.end-button, butt
     text-decoration: none; /* Убираем подчеркивание для ссылок */
 }
 
-button.login-button:hover, a.login-button:hover, button.join-button:hover, button.end-button:hover, button.enter-button:hover {
+button.login-button:hover, a.login-button:hover, button.join-button:hover, button.end-button:hover, button.enter-button:hover, button.upload-button:hover, .file-input-label:hover {
     background-color: #ffffff; /* Белый фон кнопки при наведении */
 }
+
+.file-input {
+    display: none; /* Скрываем стандартный элемент выбора файла */
+}
+
 
 p {
     text-align: center;
@@ -256,4 +260,10 @@ header {
 
 .profile-button:hover {
     background-color: #777171;
+}
+
+#video-player {
+    width: 100%; /* Ширина видеоплеера */
+    max-width: 600px; /* Максимальная ширина */
+    height: auto; /* Высота будет автоматически подстраиваться под ширину */
 }
