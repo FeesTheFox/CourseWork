@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
                     }
 
-                    if (session.creator === getCurrentUsername()) {
-                        document.getElementById('answer-container').style.display = 'block';
-                    }
+                    getCurrentUsername().then(currentUsername => {
+                        if (session.creator === currentUsername) {
+                            document.getElementById('upload-form').style.display = 'block';
+                            document.getElementById('answer-form').style.display = 'block';
+                        }
+                    });
                 } else {
                     console.error('Session data is missing');
                 }
@@ -118,8 +121,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getCurrentUsername() {
-        // Implement this function to get the current username
-        // This is just a placeholder
-        return 'currentUsername';
+        // Fetch the current user's information from the backend
+        return fetch('/api/users/current-user')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(user => {
+                return user.username;
+            })
+            .catch(error => {
+                console.error('Error fetching current user:', error);
+                return null;
+            });
     }
+    
 });

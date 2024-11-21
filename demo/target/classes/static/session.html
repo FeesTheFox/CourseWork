@@ -11,18 +11,16 @@
     <div class="session-container" id="session-container">
         <!-- Контент сессии будет загружаться динамически -->
     </div>
-    <form id="upload-form" enctype="multipart/form-data">
+    <h2>What is depicted in the Video?</h2>
+    <form id="upload-form" enctype="multipart/form-data" style="display:none;">
         <input type="file" name="file" id="file" accept="video/*" class="file-input">
         <button type="submit" class="upload-button">Upload Video</button>
     </form>
     <video id="video-player" controls style="display:none;"></video>
-    <div id="answer-container">
-        <h2>What is depicted in the Video?</h2>
-        <form id="answer-form">
-            <textarea id="answer" name="answer" rows="4" cols="50"></textarea><br>
-            <button type="submit" class="answer-button">Submit Answer</button>
-        </form>
-    </div>
+    <form id="answer-form" style="display:none;">
+        <textarea id="answer" name="answer" rows="4" cols="50"></textarea><br>
+        <button type="submit" class="answer-button">Submit Answer</button>
+    </form>
     <script src="js/session.js"></script>
 </body>
 </html>
