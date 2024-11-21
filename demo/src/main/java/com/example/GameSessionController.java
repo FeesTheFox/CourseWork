@@ -92,22 +92,28 @@ public class GameSessionController {
             return ResponseEntity.status(403).body(null); // Forbidden
         }
 
-        GameSession updatedSession = gameSessionService.saveSessionAnswer(sessionId, answer);
+        // Удалить кавычки перед сохранением
+        String sanitizedAnswer = answer.trim().replaceAll("^\"|\"$", ""); // Убирает кавычки только с начала и конца строки
+        GameSession updatedSession = gameSessionService.saveSessionAnswer(sessionId, sanitizedAnswer);
         return ResponseEntity.ok(updatedSession);
     }
 
     @PostMapping("/{sessionId}/submit-answer")
     public ResponseEntity<Map<String, String>> submitUserAnswer(@PathVariable Long sessionId, @RequestBody Map<String, String> request) {
-        String userAnswer = request.get("answer");
+        String userAnswer = request.get("answer").trim();
         GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
 
-        // Ensure the answer is compared as a plain string
-        if (gameSession.getSessionAnswer().equals(userAnswer)) {
+        // Убрать кавычки с правильного ответа и пользовательского ответа
+        String correctAnswer = gameSession.getSessionAnswer().trim().replaceAll("^\"|\"$", "");
+        userAnswer = userAnswer.replaceAll("^\"|\"$", "");
+
+        if (correctAnswer.equalsIgnoreCase(userAnswer)) {
             return ResponseEntity.ok(Map.of("message", "Correct! You won!"));
         } else {
             return ResponseEntity.ok(Map.of("message", "Nope, not quite right, try again later"));
         }
     }
+
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

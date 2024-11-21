@@ -73,10 +73,14 @@ public class GameSessionService {
     }
 
     public GameSession saveSessionAnswer(Long sessionId, String answer) {
-        GameSession gameSession = gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
-        gameSession.setSessionAnswer(answer);
+        GameSession gameSession = gameSessionRepository.findById(sessionId)
+            .orElseThrow(() -> new RuntimeException("Session not found"));
+        // Убрать кавычки перед сохранением
+        String sanitizedAnswer = answer.trim().replaceAll("^\"|\"$", "");
+        gameSession.setSessionAnswer(sanitizedAnswer);
         return gameSessionRepository.save(gameSession);
     }
+    
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

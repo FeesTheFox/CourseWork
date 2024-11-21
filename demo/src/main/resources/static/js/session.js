@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const answerForm = document.getElementById('answer-form');
         answerForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const answer = document.getElementById('answer').value;
+            const answer = document.getElementById('answer').value.trim();
 
             fetch(`/api/sessions/${sessionId}/answer`, {
                 method: 'POST',
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const userAnswerForm = document.getElementById('user-answer-form');
         userAnswerForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const userAnswer = document.getElementById('user-answer').value;
+            const userAnswer = document.getElementById('user-answer').value.trim();
 
             fetch(`/api/sessions/${sessionId}/submit-answer`, {
                 method: 'POST',
