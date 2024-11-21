@@ -26,6 +26,9 @@ public class User {
     @Column(nullable = false)
     private String role;
 
+    @Column(nullable = false)
+    private int points;
+
     public static boolean isValidRole(String role) {
         List<String> validRoles = Arrays.asList("Player", "Host");
         return validRoles.contains(role);

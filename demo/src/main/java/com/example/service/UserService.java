@@ -16,7 +16,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    
     public User registerUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new IllegalArgumentException("Username is already taken");
@@ -24,6 +23,7 @@ public class UserService implements UserDetailsService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Email is already taken");
         }
+        user.setPoints(0); // Initialize points to 0
         return userRepository.save(user);
     }
 
@@ -41,5 +41,11 @@ public class UserService implements UserDetailsService {
                 .roles(user.getRole())
                 .build();
     }
-}
 
+    public void updateUserPoints(String username, int points) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setPoints(user.getPoints() + points);
+        userRepository.save(user);
+    }
+}

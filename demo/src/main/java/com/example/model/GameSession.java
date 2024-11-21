@@ -37,4 +37,7 @@ public class GameSession {
 
     @Column
     private String sessionAnswer; // Новое поле для хранения ответа на вопрос
+
+    @Column
+    private String winner;
 }

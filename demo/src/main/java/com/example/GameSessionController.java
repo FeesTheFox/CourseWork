@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.model.GameSession;
 import com.example.service.GameSessionService;
+import com.example.service.UserService;
 
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/sessions")
 public class GameSessionController {
     @Autowired
     private GameSessionService gameSessionService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/create")
     public ResponseEntity<GameSession> createSession(@RequestBody GameSession gameSession) {
@@ -108,12 +113,15 @@ public class GameSessionController {
         userAnswer = userAnswer.replaceAll("^\"|\"$", "");
 
         if (correctAnswer.equalsIgnoreCase(userAnswer)) {
+            String currentUsername = getCurrentUsername();
+            userService.updateUserPoints(currentUsername, 1);
+            gameSessionService.updateSessionWinner(sessionId, currentUsername);
+            gameSessionService.endSessionAfterDelay(sessionId, 10000); // End session after 10 seconds
             return ResponseEntity.ok(Map.of("message", "Correct! You won!"));
         } else {
             return ResponseEntity.ok(Map.of("message", "Nope, not quite right, try again later"));
         }
     }
-
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

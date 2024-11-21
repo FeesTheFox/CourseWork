@@ -52,6 +52,21 @@ document.addEventListener('DOMContentLoaded', function() {
                             document.getElementById('user-answer-form').style.display = 'block';
                         }
                     });
+
+                    // Periodically check the session status
+                    const intervalId = setInterval(() => {
+                        fetch(`/api/sessions/${sessionId}`)
+                            .then(response => response.json())
+                            .then(updatedSession => {
+                                if (updatedSession.status === 'ended') {
+                                    clearInterval(intervalId);
+                                    window.location.href = '/dashboard';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error checking session status:', error);
+                            });
+                    }, 5000); // Check every 5 seconds
                 } else {
                     console.error('Session data is missing');
                 }
@@ -139,6 +154,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const feedback = document.getElementById('feedback');
                 feedback.textContent = result.message;
                 feedback.style.display = 'block';
+
+                if (result.message === 'Correct! You won!') {
+                    // Display the winning message
+                    alert('Correct! You won!');
+
+                    // Redirect to the dashboard after 10 seconds
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 10000);
+                }
             })
             .catch(error => {
                 console.error('Error submitting answer:', error);

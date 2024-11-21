@@ -5,6 +5,7 @@ import com.example.repository.GameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,11 +13,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class GameSessionService {
     @Autowired
     private GameSessionRepository gameSessionRepository;
+
+    @Autowired
+    private UserService userService;
 
     public GameSession createSession(GameSession gameSession) {
         validateSessionDates(gameSession.getStartTime(), gameSession.getEndTime());
@@ -80,7 +85,25 @@ public class GameSessionService {
         gameSession.setSessionAnswer(sanitizedAnswer);
         return gameSessionRepository.save(gameSession);
     }
-    
+
+    public void updateSessionWinner(Long sessionId, String winner) {
+        GameSession gameSession = gameSessionRepository.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Session not found"));
+        gameSession.setWinner(winner);
+        gameSession.setStatus("ended");
+        gameSessionRepository.save(gameSession);
+    }
+
+    @Async
+    public CompletableFuture<Void> endSessionAfterDelay(Long sessionId, long delayMillis) {
+        try {
+            Thread.sleep(delayMillis);
+            endSession(sessionId);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return CompletableFuture.completedFuture(null);
+    }
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
