@@ -42,7 +42,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/api/users/register").permitAll();
                 auth.requestMatchers("/api/sessions/**").authenticated();
-                auth.requestMatchers("/", "/index.html", "/styles.css", "/js/**", "/login", "/register", "/devlog.html","/mainpage.css","/loginregister.css", "/devlog.css", "/fonts/**", "/devlog.js", "/arrow-down.svg", "/player.svg", "/host.svg","/profile.svg").permitAll();
+                auth.requestMatchers("/", "/index.html", "/styles.css", "/js/**", "/login", "/register", "/devlog.html","/mainpage.css","/loginregister.css", "/devlog.css", "/fonts/**", "/devlog.js", "/arrow-down.svg", "/player.svg", "/host.svg","/profile.svg", "/leaderboard.svg").permitAll();
                 auth.requestMatchers("/dashboard", "/profile", "/session","/api/sessions/current-user").authenticated();
                 auth.anyRequest().authenticated();
             })

@@ -275,7 +275,7 @@ header {
     display: inline-block; /* Делаем ссылку блочным элементом */
 }
 
-.profile-button img {
+.profile-button img{
     width: 40px; /* Размер иконки */
     height: 40px; /* Размер иконки */
 }
@@ -283,6 +283,29 @@ header {
 .profile-button:hover {
     background-color: #777171;
 }
+
+
+.leaderboard-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 10px; /* Добавляем отступы для увеличения области hover */
+    transition: background-color 0.3s; /* Плавный переход для фона */
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    display: inline-block; /* Делаем ссылку блочным элементом */
+}
+
+
+.leaderboard-button img{
+    width: 40px; /* Размер иконки */
+    height: 40px; /* Размер иконки */
+}
+
+.leaderboard-button:hover {
+    background-color: #777171;
+}
+
 
 #video-player {
     width: 100%; /* Ширина видеоплеера */
