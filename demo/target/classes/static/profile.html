@@ -22,23 +22,69 @@
                 <p><strong>Username:</strong> <span id="username"></span></p>
                 <p><strong>Email:</strong> <span id="email"></span></p>
                 <p><strong>Role:</strong> <span id="role"></span></p>
-                <p><strong>Points:</strong> <span id="points"></span></p> 
+                <p><strong>Points:</strong> <span id="points"></span></p>
+                <p><strong>Times won:</strong> <span id="times-won"></span></p>
+                <p id="created-sessions-count" style="display: none;"><strong>Created Sessions:</strong> <span id="created-sessions-count-value"></span></p>
             </div>
+
+            <h2>Won Sessions</h2>
+            <div id="won-sessions" class="session-list"></div>
+
+            <h2>Created Sessions</h2>
+            <div id="created-sessions" class="session-list"></div>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-        fetch('/api/users/current-user')
-            .then(response => response.json())
-            .then(user => {
-                document.getElementById('username').textContent = user.username;
-                document.getElementById('email').textContent = user.email;
-                document.getElementById('role').textContent = user.role;
-                document.getElementById('points').textContent = user.points; // Новая строка
-            })
-            .catch(error => console.error('Error fetching user data:', error));
-    });
+            fetch('/api/users/current-user')
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById('username').textContent = user.username;
+                    document.getElementById('email').textContent = user.email;
+                    document.getElementById('role').textContent = user.role;
+                    document.getElementById('points').textContent = user.points;
+
+                    if (user.role === 'Host') {
+                        document.getElementById('created-sessions-count').style.display = 'block';
+                        document.getElementById('created-sessions-count-value').textContent = user.createdSessionsCount;
+                    }
+
+                    // Fetch and display won sessions
+                    fetch(`/api/users/${user.username}/won-sessions`)
+                        .then(response => response.json())
+                        .then(wonSessions => {
+                            const wonSessionsList = document.getElementById('won-sessions');
+                            wonSessionsList.innerHTML = '';
+                            wonSessions.forEach(session => {
+                                const sessionElement = document.createElement('div');
+                                sessionElement.className = 'session-item';
+                                sessionElement.textContent = session.sessionName;
+                                wonSessionsList.appendChild(sessionElement);
+                            });
+                            document.getElementById('times-won').textContent = wonSessions.length;
+                        })
+                        .catch(error => console.error('Error fetching won sessions:', error));
+
+                    // Fetch and display created sessions if the user is a host
+                    if (user.role === 'Host') {
+                        fetch(`/api/users/${user.username}/created-sessions`)
+                            .then(response => response.json())
+                            .then(createdSessions => {
+                                const createdSessionsList = document.getElementById('created-sessions');
+                                createdSessionsList.innerHTML = '';
+                                createdSessions.forEach(session => {
+                                    const sessionElement = document.createElement('div');
+                                    sessionElement.className = 'session-item';
+                                    sessionElement.textContent = session.sessionName;
+                                    createdSessionsList.appendChild(sessionElement);
+                                });
+                            })
+                            .catch(error => console.error('Error fetching created sessions:', error));
+                    }
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        });
 
         function goBack() {
             window.history.back();

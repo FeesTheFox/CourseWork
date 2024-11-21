@@ -1,13 +1,16 @@
 package com.example.service;
 
+import com.example.model.GameSession;
 import com.example.model.User;
 import com.example.repository.UserRepository;
+import com.example.repository.GameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +18,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private GameSessionRepository gameSessionRepository;
 
     public User registerUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
@@ -47,5 +53,13 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         user.setPoints(user.getPoints() + points);
         userRepository.save(user);
+    }
+
+    public long getCreatedSessionsCount(String username) {
+        return gameSessionRepository.countByCreator(username);
+    }
+
+    public List<GameSession> getWonSessions(String username) {
+        return gameSessionRepository.findByWinner(username);
     }
 }
