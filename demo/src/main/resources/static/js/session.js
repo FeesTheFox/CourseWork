@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (session.creator === currentUsername) {
                             document.getElementById('upload-form').style.display = 'block';
                             document.getElementById('answer-form').style.display = 'block';
+                        } else {
+                            document.getElementById('user-answer-form').style.display = 'block';
                         }
                     });
                 } else {
@@ -114,6 +116,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error submitting answer:', error);
             });
         });
+
+        const userAnswerForm = document.getElementById('user-answer-form');
+        userAnswerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userAnswer = document.getElementById('user-answer').value;
+
+            fetch(`/api/sessions/${sessionId}/submit-answer`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ answer: userAnswer })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(result => {
+                const feedback = document.getElementById('feedback');
+                feedback.textContent = result.message;
+                feedback.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error submitting answer:', error);
+            });
+        });
     } else {
         console.error('Session ID is missing');
         const sessionContainer = document.getElementById('session-container');
@@ -137,5 +167,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 return null;
             });
     }
-    
 });

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/sessions")
@@ -93,6 +94,19 @@ public class GameSessionController {
 
         GameSession updatedSession = gameSessionService.saveSessionAnswer(sessionId, answer);
         return ResponseEntity.ok(updatedSession);
+    }
+
+    @PostMapping("/{sessionId}/submit-answer")
+    public ResponseEntity<Map<String, String>> submitUserAnswer(@PathVariable Long sessionId, @RequestBody Map<String, String> request) {
+        String userAnswer = request.get("answer");
+        GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
+
+        // Ensure the answer is compared as a plain string
+        if (gameSession.getSessionAnswer().equals(userAnswer)) {
+            return ResponseEntity.ok(Map.of("message", "Correct! You won!"));
+        } else {
+            return ResponseEntity.ok(Map.of("message", "Nope, not quite right, try again later"));
+        }
     }
 
     private String getCurrentUsername() {
