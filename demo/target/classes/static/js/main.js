@@ -115,12 +115,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.forEach(session => {
                     const sessionElement = document.createElement('div');
                     sessionElement.className = 'ended-session-item';
+                    const winnerMessage = session.winner ? `Winner: ${session.winner}` : 'Creator ended session';
                     sessionElement.innerHTML = `
-                        <h3>${session.sessionName}</h3>
-                        <p>Start Time: ${new Date(session.startTime).toLocaleString()}</p>
-                        <p>End Time: ${new Date(session.endTime).toLocaleString()}</p>
-                        <p>Creator: ${session.creator}</p>
-                        <p>Joined Users: ${session.joinedUsers}</p>
+                        <div class="session-content">
+                            <h3>${session.sessionName}</h3>
+                            <p>Start Time: ${new Date(session.startTime).toLocaleString()}</p>
+                            <p>End Time: ${new Date(session.endTime).toLocaleString()}</p>
+                            <p>Creator: ${session.creator}</p>
+                            <p>Joined Users: ${session.joinedUsers}</p>
+                        </div>
+                        <div class="winner-overlay">
+                            <p>${winnerMessage}</p>
+                        </div>
                     `;
                     endedSessionList.appendChild(sessionElement);
                 });
