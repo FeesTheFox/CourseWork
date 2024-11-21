@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -53,6 +54,12 @@ public class UserController {
     public ResponseEntity<List<GameSession>> getCreatedSessions(@PathVariable String username) {
         List<GameSession> createdSessions = userService.getCreatedSessions(username);
         return ResponseEntity.ok(createdSessions);
+    }
+
+    @GetMapping("/leaderboard")
+    public ResponseEntity<List<User>> getLeaderboard() {
+        List<User> leaderboard = userService.getLeaderboard();
+        return ResponseEntity.ok(leaderboard);
     }
 
     private String getCurrentUsername() {

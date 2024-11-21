@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link type="Image/x-icon" href="/icon/ignisreges.ico" rel="icon">
+    <style>
+        @font-face {
+            font-family: 'Soehne';
+            src: url('/fonts/TestSöhneMono-Buch.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Soehne';
+            src: url('/fonts/TestSöhneMono-Extrafett.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Soehne', Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .leaderboard-container {
+            margin-bottom: 40px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .leaderboard-table th, .leaderboard-table td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: left;
+            color: #e0e0e0;
+        }
+
+        .leaderboard-table th {
+            background-color: #3b3b3b;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background-color: #222222;
+        }
+
+        .leaderboard-table tr:nth-child(odd) {
+            background-color: #111111;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>Leaderboard</h1>
+        </header>
+
+        <div class="leaderboard-container">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Leaderboard data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/users/leaderboard')
+                .then(response => response.json())
+                .then(leaderboard => {
+                    const leaderboardBody = document.getElementById('leaderboard-body');
+                    leaderboardBody.innerHTML = '';
+                    leaderboard.forEach((user, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${user.username}</td>
+                            <td>${user.points}</td>
+                        `;
+                        leaderboardBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching leaderboard data:', error));
+        });
+    </script>
+</body>
+</html>

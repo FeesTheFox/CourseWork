@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class UserService implements UserDetailsService {
 
@@ -65,5 +64,9 @@ public class UserService implements UserDetailsService {
 
     public List<GameSession> getCreatedSessions(String username) {
         return gameSessionRepository.findByCreator(username);
+    }
+
+    public List<User> getLeaderboard() {
+        return userRepository.findAllByOrderByPointsDesc();
     }
 }
