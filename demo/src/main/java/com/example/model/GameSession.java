@@ -34,4 +34,7 @@ public class GameSession {
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] videoData; // Новая колонка для хранения видео данных
+
+    @Column
+    private String sessionAnswer; // Новое поле для хранения ответа на вопрос
 }

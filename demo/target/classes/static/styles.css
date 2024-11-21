@@ -19,7 +19,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
 }
@@ -75,7 +75,6 @@ button.login-button, a.login-button, button.join-button, button.end-button, butt
 button.login-button:hover, a.login-button:hover, button.join-button:hover, button.end-button:hover, button.enter-button:hover, button.upload-button:hover {
     background-color: #ffffff; /* Белый фон кнопки при наведении */
 }
-
 
 p {
     text-align: center;
@@ -170,7 +169,6 @@ p {
     background-color: #03172e; /* Цвет полосы при наведении */
 }
 
-
 /* Existing styles */
 
 .ended-sessions-container {
@@ -185,6 +183,7 @@ p {
 
 .ended-session-list {
     display: flex;
+    flex-direction: column;
     overflow-x: auto;
     gap: 10px;
     padding: 10px;
@@ -263,4 +262,32 @@ header {
     width: 100%; /* Ширина видеоплеера */
     max-width: 600px; /* Максимальная ширина */
     height: auto; /* Высота будет автоматически подстраиваться под ширину */
+    margin-top: 20px;
+}
+
+#answer-container {
+    margin-top: 20px;
+}
+
+#answer-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#answer-container textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    background-color: #3b3b3b; /* Темный фон полей ввода */
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #e0e0e0; /* Светлый текст */
+    margin-bottom: 10px;
+}
+
+#answer-container button {
+    width: 100%;
+    max-width: 600px;
 }

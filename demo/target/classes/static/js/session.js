@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const sessionContainer = document.getElementById('session-container');
                     sessionContainer.innerHTML = `
                         <h1>${session.sessionName || 'Session Name Not Available'}</h1>
-                        <p>Start Time: ${session.startTime ? new Date(session.startTime).toLocaleString() : 'Not Available'}</p>
-                        <p>End Time: ${session.endTime ? new Date(session.endTime).toLocaleString() : 'Not Available'}</p>
                         <p>Status: ${session.status || 'Not Available'}</p>
                         <p>Creator: ${session.creator || 'Not Available'}</p>
                         <p>Joined Users: ${session.joinedUsers || 'Not Available'}</p>
@@ -44,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             .catch(error => {
                                 console.error('Error loading video:', error);
                             });
+                    }
+
+                    if (session.creator === getCurrentUsername()) {
+                        document.getElementById('answer-container').style.display = 'block';
                     }
                 } else {
                     console.error('Session data is missing');
@@ -83,9 +85,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error uploading video:', error);
             });
         });
+
+        const answerForm = document.getElementById('answer-form');
+        answerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const answer = document.getElementById('answer').value;
+
+            fetch(`/api/sessions/${sessionId}/answer`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(answer)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(session => {
+                alert('Answer submitted successfully');
+            })
+            .catch(error => {
+                console.error('Error submitting answer:', error);
+            });
+        });
     } else {
         console.error('Session ID is missing');
         const sessionContainer = document.getElementById('session-container');
         sessionContainer.innerHTML = `<p>Session ID is missing</p>`;
+    }
+
+    function getCurrentUsername() {
+        // Implement this function to get the current username
+        // This is just a placeholder
+        return 'currentUsername';
     }
 });

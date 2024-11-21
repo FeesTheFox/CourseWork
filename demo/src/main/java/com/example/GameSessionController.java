@@ -71,19 +71,29 @@ public class GameSessionController {
 
     @GetMapping("/{sessionId}/video")
     public ResponseEntity<byte[]> getVideo(@PathVariable Long sessionId) {
-    GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
-    if (gameSession.getVideoData() != null) {
-        MediaType videoMp4 = new MediaType("video", "mp4"); // Создание MediaType вручную
-        return ResponseEntity.ok()
-                .contentType(videoMp4) // Установите правильный MIME-тип
-                .body(gameSession.getVideoData());
-    } else {
-        return ResponseEntity.notFound().build();
+        GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
+        if (gameSession.getVideoData() != null) {
+            MediaType videoMp4 = new MediaType("video", "mp4"); // Создание MediaType вручную
+            return ResponseEntity.ok()
+                    .contentType(videoMp4) // Установите правильный MIME-тип
+                    .body(gameSession.getVideoData());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-}
 
+    @PostMapping("/{sessionId}/answer")
+    public ResponseEntity<GameSession> saveSessionAnswer(@PathVariable Long sessionId, @RequestBody String answer) {
+        String currentUsername = getCurrentUsername();
+        GameSession gameSession = gameSessionService.getSessionDetails(sessionId);
 
+        if (!gameSession.getCreator().equals(currentUsername)) {
+            return ResponseEntity.status(403).body(null); // Forbidden
+        }
 
+        GameSession updatedSession = gameSessionService.saveSessionAnswer(sessionId, answer);
+        return ResponseEntity.ok(updatedSession);
+    }
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

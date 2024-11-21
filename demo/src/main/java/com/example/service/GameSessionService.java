@@ -66,13 +66,17 @@ public class GameSessionService {
 
     public GameSession uploadVideo(Long sessionId, MultipartFile file) throws IOException {
         GameSession gameSession = gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
-    
+
         // Сохраняем данные файла в базе данных
         gameSession.setVideoData(file.getBytes());
         return gameSessionRepository.save(gameSession);
     }
-    
-    
+
+    public GameSession saveSessionAnswer(Long sessionId, String answer) {
+        GameSession gameSession = gameSessionRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
+        gameSession.setSessionAnswer(answer);
+        return gameSessionRepository.save(gameSession);
+    }
 
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
