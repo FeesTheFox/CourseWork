@@ -49,6 +49,12 @@ public class UserController {
         return ResponseEntity.ok(wonSessions);
     }
 
+    @GetMapping("/{username}/created-sessions")
+    public ResponseEntity<List<GameSession>> getCreatedSessions(@PathVariable String username) {
+        List<GameSession> createdSessions = userService.getCreatedSessions(username);
+        return ResponseEntity.ok(createdSessions);
+    }
+
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {

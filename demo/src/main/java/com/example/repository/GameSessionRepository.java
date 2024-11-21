@@ -9,4 +9,5 @@ public interface GameSessionRepository extends JpaRepository<GameSession, Long> 
     List<GameSession> findByStatus(String status);
     long countByCreator(String creator);
     List<GameSession> findByWinner(String winner);
+    List<GameSession> findByCreator(String creator);
 }

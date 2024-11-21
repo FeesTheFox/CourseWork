@@ -23,15 +23,14 @@
                 <p><strong>Email:</strong> <span id="email"></span></p>
                 <p><strong>Role:</strong> <span id="role"></span></p>
                 <p><strong>Points:</strong> <span id="points"></span></p>
-                <p><strong>Times won:</strong> <span id="times-won"></span></p>
                 <p id="created-sessions-count" style="display: none;"><strong>Created Sessions:</strong> <span id="created-sessions-count-value"></span></p>
             </div>
 
             <h2>Won Sessions</h2>
             <div id="won-sessions" class="session-list"></div>
 
-            <h2>Created Sessions</h2>
-            <div id="created-sessions" class="session-list"></div>
+            <h2 id="created-sessions-title" style="display: none;">Created Sessions</h2>
+            <div id="created-sessions" class="session-list" style="display: none;"></div>
         </div>
     </div>
 
@@ -48,6 +47,8 @@
                     if (user.role === 'Host') {
                         document.getElementById('created-sessions-count').style.display = 'block';
                         document.getElementById('created-sessions-count-value').textContent = user.createdSessionsCount;
+                        document.getElementById('created-sessions-title').style.display = 'block';
+                        document.getElementById('created-sessions').style.display = 'block';
                     }
 
                     // Fetch and display won sessions

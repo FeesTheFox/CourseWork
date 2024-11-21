@@ -62,4 +62,8 @@ public class UserService implements UserDetailsService {
     public List<GameSession> getWonSessions(String username) {
         return gameSessionRepository.findByWinner(username);
     }
+
+    public List<GameSession> getCreatedSessions(String username) {
+        return gameSessionRepository.findByCreator(username);
+    }
 }
