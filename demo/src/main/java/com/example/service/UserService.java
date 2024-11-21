@@ -21,6 +21,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private GameSessionRepository gameSessionRepository;
 
+    
     public User registerUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new IllegalArgumentException("Username is already taken");
