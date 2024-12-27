@@ -1,4 +1,4 @@
-The Course Work for a Video hosting platform with videogames.
+The Course Work for a Video hosting platform for videogames with real actors.
 
 It's a website that can host a sessions. Sessions are like crocodile games - where you need to guess what is depicted in the video!
 
