@@ -8,6 +8,7 @@ To win a game you need to guess what is depicted in the video.
 
 
 The project is done with:
+
 ***SERVER PART***
 - Java
 - Springboot
