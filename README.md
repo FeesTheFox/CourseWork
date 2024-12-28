@@ -19,4 +19,4 @@ The project is done with:
 - CSS 3
 - Javascript
 
-Used Visual Studio Code as a framework.
+Used Visual Studio Code as a IDE.
